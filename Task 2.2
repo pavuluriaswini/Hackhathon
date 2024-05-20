@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Jobs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+        }
+
+        #applyForm {
+            background: #444;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #ddd;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #666;
+            color: #f4f4f4;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        #employedFields {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #555;
+        }
+
+        #jobsToApply {
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form id="applyForm" onsubmit="return validateForm()">
+        <h2>Apply for Jobs</h2>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" required>
+
+        <label for="zip">Zip:</label>
+        <input type="number" id="zip" name="zip" required>
+
+        <label for="country">Country:</label>
+        <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+            <option value="india">India</option>
+            <option value="germany">Germany</option>
+            <option value="france">France</option>
+            <option value="china">China</option>
+            <option value="japan">Japan</option>
+            <option value="brazil">Brazil</option>
+            <option value="southafrica">South Africa</option>
+            <option value="mexico">Mexico</option>
+            <option value="italy">Italy</option>
+        </select>
+
+        <label for="educationLevel">Education Level:</label>
+        <select id="educationLevel" name="educationLevel" required>
+            <option value="">Select Education Level</option>
+            <option value="highschool">High School</option>
+            <option value="associate">Associate Degree</option>
+            <option value="bachelor">Bachelor's Degree</option>
+            <option value="master">Master's Degree</option>
+            <option value="phd">PhD</option>
+        </select>
+
+        <label for="educationType">Education Type:</label>
+        <select id="educationType" name="educationType" required>
+            <option value="">Select Education Type</option>
+            <option value="fulltime">Full-time</option>
+            <option value="parttime">Part-time</option>
+            <option value="online">Online</option>
+        </select>
+
+        <label for="resume">Resume:</label>
+        <input type="file" id="resume" name="resume" required>
+
+        <label for="coverLetter">Cover Letter:</label>
+        <textarea id="coverLetter" name="coverLetter"></textarea>
+
+        <label for="employed">Are you employed?</label>
+        <input type="checkbox" id="employed" name="employed" onclick="toggleEmployedFields()">
+
+        <div id="employedFields" style="display:none;">
+            <label for="currentEmployer">Current Employer:</label>
+            <input type="text" id="currentEmployer" name="currentEmployer">
+
+            <label for="yearsOfExperience">Years of Experience:</label>
+            <input type="number" id="yearsOfExperience" name="yearsOfExperience">
+        </div>
+
+        <label for="jobsToApply">Jobs you want to apply for:</label>
+        <select id="jobsToApply" name="jobsToApply" multiple>
+            <option value="IT Manager">IT Manager</option>
+            <option value="HR Manager">HR Manager</option>
+            <option value="Manager">Manager</option>
+            <option value="Developer">Developer</option>
+            <option value="HR Assistant">HR Assistant</option>
+            <option value="Sales Manager">Sales Manager</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Data Analyst">Data Analyst</option>
+            <option value="Graphic Designer">Graphic Designer</option>
+            <option value="Product Manager">Product Manager</option>
+            <option value="Financial Analyst">Financial Analyst</option>
+            <option value="Customer Service">Customer Service</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function toggleEmployedFields() {
+            var employedFields = document.getElementById('employedFields');
+            employedFields.style.display = document.getElementById('employed').checked ? 'block' : 'none';
+        }
+
+        function validateForm() {
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zip', 'country', 'educationLevel', 'educationType', 'resume'];
+            for (let field of requiredFields) {
+                if (!document.getElementById(field).value) {
+                    alert('Please fill out all required fields.');
+                    return false;
+                }
+            }
+
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const zip = document.getElementById('zip').value;
+            const yearsOfExperience = document.getElementById('yearsOfExperience');
+
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            const phonePattern = /^\d{10}$/;
+
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if (!phonePattern.test(phone)) {
+                alert('Please enter a valid phone number.');
+                return false;
+            }
+
+            if (isNaN(zip) || zip <= 0) {
+                alert('Please enter a valid zip code.');
+                return false;
+            }
+
+            if (yearsOfExperience && (isNaN(yearsOfExperience.value) || yearsOfExperience.value < 0)) {
+                alert('Please enter a valid number of years of experience.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
